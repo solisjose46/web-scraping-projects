@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>stripsrcset</title>
+  <meta name="description" content="The HTML5 Herald">
+  <meta name="author" content="SitePoint">
+  <!-- codemirror -->
+  <link rel="stylesheet" href="https://codemirror.net/lib/codemirror.css">
+  <script src="https://codemirror.net/addon/runmode/runmode-standalone.js"></script>
+  <script src="https://codemirror.net/mode/python/python.js"></script>
+</head>
+<body>
+    <pre><code id="python_code3">
+import os
+from bs4 import BeautifulSoup
+
+paths = ['../local-journalist-archive/stories/azmirror/', '../local-journalist-archive/stories/downtowndevil/']
+
+for count, path in enumerate(paths):
+    for filename in os.listdir(path):
+        with open(path + filename, encoding='utf8') as fp:
+            soup = BeautifulSoup(fp, 'html.parser')
+        
+        imgs = soup.find_all('img')
+
+        for i, img in enumerate(imgs):
+            img['srcset'] = ''
+        
+        #update html file via new soup
+        newhtml = soup.prettify("utf-8")
+        with open(path + filename, "wb") as f:
+            f.write(newhtml)
+            
+print('img srcset removed')    
+
+    </code></pre>
+    <script>
+        window.onload = function(){
+            var codeElement = document.getElementById('python_code3');
+            codeElement.classList.add( 'cm-s-default' );
+            var code = codeElement.innerText;
+        
+            codeElement.innerHTML = "";
+        
+            CodeMirror.runMode(
+              code,
+              'python',
+              codeElement
+            );
+        };
+    </script>
+</body>
+</html>

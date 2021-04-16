@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Web Scraping</title>
+  </head>
+  <body>
+    <div class="container-fluid bg-secondary">
+        <div class="row">
+            <div class="col">
+                <h1><strong>web-scraping-projects</strong></h1>
+            </div>
+        </div>
+        <!--------------Navbar-------------->
+        <div class="row">
+            <div class="col">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                      <a class="nav-link active" id="journal-tab" data-toggle="tab" href="#journal" role="tab" aria-controls="journal" aria-selected="true">journalist-archive</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" id="shop-tab" data-toggle="tab" href="#shop" role="tab" aria-controls="shop" aria-selected="false">Shop</a>
+                    </li>
+                  </ul>
+            </div>
+        </div>
+        <!--------------Navbar-------------->
+        <!--------------Body-------------->
+        <div class="row">
+            <div class="col tab-content" id="pills-tabContent">
+                <!--------------journalist-archive-------------->
+                <div class="row tab-pane fade show active" id="journal" role="tabpanel" aria-labelledby="pills-journal-tab">
+                    <div class="col">
+                        <div class="row">
+                            <div class="col">
+                                <h2>journalist-archive</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <p><strong>Problem:</strong> Journalist has written several stories for various publications. Journalist wants to keep track of stories.</p>
+                                <p><strong>Solution:</strong> Create online and local archives. Online uses cdn resources for images but local downloads all resources for local use.</p>
+                                <p><a href="https://solisjose46.github.io/journalist-archive/" target="_blank" rel="noreferrer noopener">See online archive here</a></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="list-group">
+                                    <div class="list-group-item">
+                                        <div class="d-flex justify-content-between">
+                                            <h4><strong>Get Stories</strong></h4>
+                                            <small class="text-muted">1</small>
+                                        </div>
+                                        <div>
+                                            <p>First, pages with links to the stories were identified and collected.</p>
+                                            <p>Then, each story (link) was scraped for title, header and text.</p>
+                                            <p>Each story was saved as an html file.</p>
+                                            <div class="card">
+                                                <embed src="code0.html"/>
+                                            </div>
+                                            <p><a href="https://github.com/solisjose46/myscripts/blob/main/getstories.py" target="_blank" rel="noreferrer noopener">getstories.py</a></p>
+                                        </div>
+                                    </div>
+                                    <div class="list-group-item">
+                                        <div class="d-flex justify-content-between">
+                                            <h4><strong>Add Content to index.html</strong></h4>
+                                            <small class="text-muted">2</small>
+                                        </div>
+                                        <div>
+                                            <p>Next, the html files created from the script above needed to be organized.</p>
+                                            <p>A main html page with bootstrap cdn was used to centralize the html files.</p>
+                                            <p>Each story (link to) was inserted as a list item in the main html page.</p>
+                                            <div class="card">
+                                                <embed src="code1.html"/>
+                                            </div>
+                                            <p><a href="https://github.com/solisjose46/myscripts/blob/main/add-content.py" target="_blank" rel="noreferrer noopener">add-content.py</a></p>
+                                        </div>
+                                    </div>
+                                    <div class="list-group-item">
+                                        <div class="d-flex justify-content-between">
+                                            <h4><strong>fix src in img tags and strip srcset from local html files</strong></h4>
+                                            <small class="text-muted">3</small>
+                                        </div>
+                                        <div>
+                                            <p>Final step was to localize resources such as images used in the articles.</p>
+                                            <p>I went to download the images via python request but my flow was interrupted because there was a typo in the src of some images.</p>
+                                            <p>Luckily the typo was a common issue among the srcs that had it.</p>
+                                            <div class="card">
+                                                <embed src="code2.html"/>
+                                            </div>
+                                            <p><a href="https://github.com/solisjose46/myscripts/blob/main/fixsrc.py" target="_blank" rel="noreferrer noopener">fixsrc.py</a></p>
+                                            <p>After, I decided I wanted the img srcset attribute removed.</p>
+                                            <div class="card">
+                                                <embed src="code3.html"/>
+                                            </div>
+                                            <p><a href="https://github.com/solisjose46/myscripts/blob/main/stripsrcset.py" target="_blank" rel="noreferrer noopener">stripsrcset.py</a></p>
+                                        </div>
+                                    </div>
+                                    <div class="list-group-item">
+                                        <div class="d-flex justify-content-between">
+                                            <h4><strong>Archive images</strong></h4>
+                                            <small class="text-muted">4</small>
+                                        </div>
+                                        <div>
+                                            <p>Since img srcs were fixed, I was able to resume with the automated get requests for the images.</p>
+                                            <p>Script gets the img src which is link. Uses that link to make the get request then renames the img src with local path.</p>
+                                            <p>All html files were updated with local paths for img src.</p>
+                                            <div class="card">
+                                                <embed src="code4.html"/>
+                                            </div>
+                                            <p><a href="https://github.com/solisjose46/myscripts/blob/main/archiveimages.py" target="_blank" rel="noreferrer noopener">archiveimages.py</a></p>
+                                        </div>
+                                    </div>     
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--------------journalist-archive-------------->
+                <!--------------shop-------------->
+                <div class="row tab-pane fade" id="shop" role="tabpanel" aria-labelledby="pills-shop-tab">
+                    <div class="col">In progress...</div>
+                </div>
+                <!--------------shop-------------->
+            </div>
+        </div>
+        <!--------------Body-------------->
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
